@@ -10,14 +10,9 @@ CDN_ID=$1            #E3554BHOW3RXY2
 DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-east-1.amazonaws.com"
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
 
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:~/bin
-wget -O awscli-bundle.zip https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
-unzip awscli-bundle.zip
-./awscli-bundle/install -b ~/bin/aws
-/usr/bin/pip install awscli --upgrade --user
-ls -la /usr/bin/python
-/usr/local/bin/aws
-
+ls -la /home/tfo-runner
+cp -f /home/tfo-runner/aws /usr/local/bin/aws
+/usr/local/bin/aws --version
 function fail {
   echo $1 >&2
   exit 1
