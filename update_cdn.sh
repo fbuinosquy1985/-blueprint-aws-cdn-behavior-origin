@@ -14,11 +14,8 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/ga
 wget -O awscli-bundle.zip https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
 unzip awscli-bundle.zip
 ./awscli-bundle/install -b ~/bin/aws
-pip install awscli --upgrade --user
-pip3 install awscli --upgrade --user
-which aws
-which python
-which python2
+/usr/bin/pip install awscli --upgrade --user
+ls -la /usr/bin/python
 /usr/local/bin/aws
 
 function fail {
