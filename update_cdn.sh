@@ -9,10 +9,8 @@
 CDN_ID=$1            #E3554BHOW3RXY2
 DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-east-1.amazonaws.com"
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
+AWS_PATH=/home/tfo-runner/.local/bin/aws
 
-ls -la /home/tfo-runner/.local/bin
-cp -f /home/tfo-runner/.local/bin/aws /usr/local/bin/aws
-/usr/local/bin/aws --version
 function fail {
   echo $1 >&2
   exit 1
@@ -41,7 +39,7 @@ rm -f cdn2.json
 echo "============================================================================================================="
 echo "OBTAINING CLOUDFRONT CONFIGURATION                                                                           "
 echo "============================================================================================================="
-retry /usr/local/bin/aws cloudfront get-distribution-config --id ${CDN_ID} > cdn.json
+retry $AWS_PATH cloudfront get-distribution-config --id ${CDN_ID} > cdn.json
 ETAG=$(cat cdn.json | jq -r .ETag)
 CDN=$(cat cdn.json | jq -r 'del(.ETag)')
 ORIGIN='
@@ -137,12 +135,12 @@ echo "==========================================================================
 echo "APPLYING THE  CONFIGURATION                                                                                  "
 echo "============================================================================================================="
 echo $CDN |jq -r .DistributionConfig > cdn2.json
-result=$(retry /usr/local/bin/aws cloudfront update-distribution --id $CDN_ID --distribution-config file://cdn2.json --if-match ${ETAG})		
+result=$(retry $AWS_PATH cloudfront update-distribution --id $CDN_ID --distribution-config file://cdn2.json --if-match ${ETAG})		
 
 echo "============================================================================================================="
 echo "WAITING TO SEE IF THE CONFIGURATION WAS APPLIED                                                              "
 echo "============================================================================================================="
 echo "$(echo $result | jq -r '.Distribution.Id + ": " + .Distribution.Status')"
-/usr/local/bin/aws cloudfront wait distribution-deployed --id $CDN_ID && echo "Cloudfront Modification Completed";
+retry $AWS_PATH cloudfront wait distribution-deployed --id $CDN_ID && echo "Cloudfront Modification Completed";
 
 rm -f cdn2.json
