@@ -11,6 +11,8 @@ DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
 
 ls -la /home/tfo-runner
+ls -la /home/tfo-runner/.local
+ls -la /home/tfo-runner/.local/bin
 cp -f /home/tfo-runner/aws /usr/local/bin/aws
 /usr/local/bin/aws --version
 function fail {
