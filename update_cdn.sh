@@ -10,6 +10,7 @@ CDN_ID=$1            #E3554BHOW3RXY2
 DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-east-1.amazonaws.com"
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
 
+export PATH=$PATH:/usr/local/bin
 function fail {
   echo $1 >&2
   exit 1
