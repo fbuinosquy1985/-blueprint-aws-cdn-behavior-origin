@@ -108,9 +108,6 @@ BEHAVIOR='
           "LambdaFunctionAssociations": {
             "Quantity": 0
           },
-          "FunctionAssociations": {
-            "Quantity": 0
-          },
           "FieldLevelEncryptionId": "",
           "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
         }'
