@@ -1,6 +1,6 @@
 # blueprint-aws-cdn-behavior-origin
 
-.Where the terraform code is going to be located , that executes the update script to modify a cloudfront distribution.
+Shell script to add a origin and a behavior & terraform code  , that executes the update script to modify a cloudfront distribution.
 
 ## How to use the script from terraform ?
 
