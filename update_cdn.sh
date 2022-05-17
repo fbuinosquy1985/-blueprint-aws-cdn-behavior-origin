@@ -17,6 +17,8 @@ unzip awscli-bundle.zip
 pip install awscli --upgrade --user
 pip3 install awscli --upgrade --user
 which aws
+which python
+which python2
 /usr/local/bin/aws
 
 function fail {
