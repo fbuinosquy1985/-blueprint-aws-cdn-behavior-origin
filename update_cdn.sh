@@ -11,9 +11,11 @@ DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
 
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:~/bin
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+wget -O awscli-bundle.zip https://s3.amazonaws.com/aws-cli/awscli-bundle.zip
 unzip awscli-bundle.zip
 ./awscli-bundle/install -b ~/bin/aws
+pip install awscli --upgrade --user
+pip3 install awscli --upgrade --user
 which aws
 /usr/local/bin/aws
 
