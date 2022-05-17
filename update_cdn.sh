@@ -11,6 +11,10 @@ DOMAIN_NAME=$2       #"aac5e1e3235cc4c028de730c26369163-d8052e4acdbbae74.elb.us-
 SHORT_DOMAIN_NAME=$3 #crm-uat-prod
 
 export PATH=$PATH:/usr/local/bin
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py
+pip install awscli --upgrade
+/usr/local/bin/aws
+
 function fail {
   echo $1 >&2
   exit 1
