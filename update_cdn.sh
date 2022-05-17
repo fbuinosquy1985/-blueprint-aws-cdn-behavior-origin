@@ -33,10 +33,7 @@ function retry {
     }
   done
 }
-apk add --update-cache python3 python3-dev py-pip build-base curl jq
-JQ=/usr/bin/jq
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python3 get-pip.py
-pip install awscli --upgrade
+
 rm -f cdn2.json
 echo "============================================================================================================="
 echo "OBTAINING CLOUDFRONT CONFIGURATION                                                                           "
