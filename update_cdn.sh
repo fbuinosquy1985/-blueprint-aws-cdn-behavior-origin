@@ -143,3 +143,8 @@ echo "$(echo $result | jq -r '.Distribution.Id + ": " + .Distribution.Status')"
 retry $AWS_PATH cloudfront wait distribution-deployed --id $CDN_ID && echo "Cloudfront Modification Completed";
 
 rm -f cdn2.json
+
+echo "============================================================================================================="
+echo "PAUSE TO SEE THE LOGS                                                              "
+echo "============================================================================================================="
+sleep 30
