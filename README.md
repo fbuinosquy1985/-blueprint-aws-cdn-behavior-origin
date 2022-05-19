@@ -1,6 +1,6 @@
 # blueprint-aws-cdn-behavior-origin
 
-Shell script to add a origin and a behavior & terraform code  , that executes the update script to modify a cloudfront distribution.
+Shell script to add a origin and a behavior & terraform code  , that executes the update script to modify a cloudfront distribution when destroyed it removes the origin and behavior.
 
 ## How to use the script from terraform ?
 
@@ -12,7 +12,7 @@ Shell script to add a origin and a behavior & terraform code  , that executes th
     terraform plan
     terraform apply
 
-## How to use the script from a console ?
+## How to use the add script from a console ?
 
     Example:
 
@@ -21,3 +21,14 @@ Shell script to add a origin and a behavior & terraform code  , that executes th
     Where the fields mean.
 
     ./update_cdn.sh CLOUDFRONT_ID LOAD_BALANCER_URL CLOUDFRONT_BEHAVIOR_PATH
+    
+
+## How to use the remove script from a console ?
+
+    Example:
+
+    ./remove_cdn.sh E3554BHOW3RXY2 crm-fe-prod
+
+    Where the fields mean.
+
+    ./remove_cdn.sh CLOUDFRONT_ID CLOUDFRONT_BEHAVIOR_PATH
