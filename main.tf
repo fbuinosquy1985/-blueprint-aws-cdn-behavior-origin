@@ -17,7 +17,7 @@ resource "null_resource" "update_cdn" {
   }
 
   lifecycle {
-    create_before_destroy = false
+    create_before_destroy = true
   }
 }
 
