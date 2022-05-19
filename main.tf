@@ -1,9 +1,12 @@
 
 
 resource "null_resource" "update_cdn" {
-  triggers = {
-    always_run = timestamp()
-  }
+  
+  triggers {
+    cdn_id = var.cdn_id
+	lb_url = var.lb_url
+	cdn_path = var.cdn_path
+  }  
 
   provisioner "local-exec" {
     interpreter = ["sh", "-c"]
@@ -13,7 +16,7 @@ resource "null_resource" "update_cdn" {
   provisioner "local-exec" {
     when        = "destroy"
     interpreter = ["sh", "-c"]
-    command     = "./remove_cdn.sh ${var.cdn_id} ${var.cdn_path}"
+    command     = "./remove_cdn.sh ${self.triggers.cdn_id} ${self.triggers.cdn_path}"
   }
 
   lifecycle {
