@@ -1,6 +1,10 @@
 # blueprint-aws-cdn-behavior-origin
 
-Shell script to add a origin and a behavior & terraform code  , that executes the update script to modify a cloudfront distribution when destroyed it removes the origin and behavior.
+Shell script glue with Terraform to add a origin and a behavior & terraform code  , that executes the update script to modify a cloudfront distribution when destroyed it removes the origin and behavior.
+
+
+Check the aws path that is set on the script ( is hardcoded )
+
 
 ## How to use the script from terraform ?
 
