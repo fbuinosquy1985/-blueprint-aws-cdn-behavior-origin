@@ -2,7 +2,7 @@
 
 resource "null_resource" "update_cdn" {
   
-  triggers {
+  triggers = {
     cdn_id = var.cdn_id
 	lb_url = var.lb_url
 	cdn_path = var.cdn_path
