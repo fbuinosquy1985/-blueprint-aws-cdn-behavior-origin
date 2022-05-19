@@ -7,7 +7,7 @@
 
 CDN_ID=$1            #E3554BHOW3RXY2
 SHORT_DOMAIN_NAME=$2 #crm-uat-prod
-
+AWS_PATH=/usr/bin/aws
 function fail {
   echo $1 >&2
   exit 1
@@ -36,7 +36,7 @@ rm -f cdn2.json
 echo "============================================================================================================="
 echo "OBTAINING CLOUDFRONT CONFIGURATION                                                                           "
 echo "============================================================================================================="
-retry aws cloudfront get-distribution-config --id ${CDN_ID} > cdn.json
+retry $AWS_PATH cloudfront get-distribution-config --id ${CDN_ID} > cdn.json
 ETAG=$(cat cdn.json | jq -r .ETag)
 CDN=$(cat cdn.json | jq -r 'del(.ETag)')
 SHORT_DOMAIN_NAME_ORG=$SHORT_DOMAIN_NAME-org
@@ -59,12 +59,12 @@ echo "==========================================================================
 echo "APPLYING THE  CONFIGURATION                                                                                  "
 echo "============================================================================================================="
 echo $CDN |jq -r .DistributionConfig > cdn2.json
-result=$(retry aws cloudfront update-distribution --id $CDN_ID --distribution-config file://cdn2.json --if-match ${ETAG})		
+result=$(retry $AWS_PATH cloudfront update-distribution --id $CDN_ID --distribution-config file://cdn2.json --if-match ${ETAG})		
 
 echo "============================================================================================================="
 echo "WAITING TO SEE IF THE CONFIGURATION WAS APPLIED                                                              "
 echo "============================================================================================================="
 echo "$(echo $result | jq -r '.Distribution.Id + ": " + .Distribution.Status')"
-aws cloudfront wait distribution-deployed --id $CDN_ID && echo "Cloudfront Modification Completed";
+retry $AWS_PATH cloudfront wait distribution-deployed --id $CDN_ID && echo "Cloudfront Modification Completed";
 
 rm -f cdn2.json
